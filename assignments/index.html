@@ -2,12 +2,80 @@
 <html>
 <head>
 	<title>Angular Training</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 </head>
 <body ng-app="expenseManager">
-	<div ng-controller="mainController">
-		<span>{{name}}</span>
+	<div ng-controller="ExpenseController" class="col-lg-12">
+		<button ng-click="showIncome = !showIncome">Show Income</button>
+		<button ng-click="showExpense = !showExpense">Show Expense</button>
+		<button ng-show="showIncome" ng-click="addIncome = !addIncome">Add Income</button>
+		<button ng-show="showExpense" ng-click="addExpense = !addExpense">Add Expense</button>
+		<div>Total Income : </div>
+		<div>Total Expense : </div>
+		<div>Total Balance : </div>
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Payer</th>
+					<th>Payee</th>
+					<th>Amount</th>
+					<th>Date</th>
+					<th>Mode Of Payment</th>
+					<th>Notes</th>
+					<th>Type</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="expense in expenses" ng-show="showExpense">
+					<td>{{expense.id}}</td>
+					<td>{{expense.payer}}</td>
+					<td>{{expense.payee}}</td>
+					<td>{{expense.amount}}</td>
+					<td>{{expense.date}}</td>
+					<td>{{expense.modeOfPayment}}</td>
+					<td>{{expense.notes}}</td>
+					<td>{{expense.type}}</td>
+				</tr>
+				<tr ng-show="addExpense">
+					<td><input type="text" ng-model="rowObject.id"></td>
+					<td><input type="text" ng-model="rowObject.payer"></td>
+					<td><input type="text" ng-model="rowObject.payee"></td>
+					<td><input type="text" ng-model="rowObject.amount"></td>
+					<td><input type="text" ng-model="rowObject.date"></td>
+					<td><input type="text" ng-model="rowObject.mode"></td>
+					<td><input type="text" ng-model="rowObject.notes"></td>
+					<td><input type="text" ng-model="rowObject.type"></td>
+					<td><button ng-click="addExpenseRow()">+</button></td>
+				</tr>
+			</tbody>
+			<tbody>
+				<tr ng-repeat="income in incomes" ng-show="showIncome">
+					<td>{{income.id}}</td>
+					<td>{{income.payer}}</td>
+					<td>{{income.payee}}</td>
+					<td>{{income.amount}}</td>
+					<td>{{income.date}}</td>
+					<td>{{income.modeOfPayment}}</td>
+					<td>{{income.notes}}</td>
+					<td>{{income.type}}</td>
+				</tr>
+				<tr ng-show="addIncome">
+					<td><input type="text" ng-model="rowObject.id"></td>
+					<td><input type="text" ng-model="rowObject.payer"></td>
+					<td><input type="text" ng-model="rowObject.payee"></td>
+					<td><input type="text" ng-model="rowObject.amount"></td>
+					<td><input type="text" ng-model="rowObject.date"></td>
+					<td><input type="text" ng-model="rowObject.mode"></td>
+					<td><input type="text" ng-model="rowObject.notes"></td>
+					<td><input type="text" ng-model="rowObject.type"></td>
+					<td><button ng-click="addIncomeRow()">+</button></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 	<script type="text/javascript" src="js/libs/angular.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/app/controller/expense_controller.js"></script>
 </body>
 </html>
