@@ -1,6 +1,6 @@
 app.controller('ExpenseController',['$scope', function($scope){
 	// $scope.name = "Hello Adarsh";
-	$scope.expenses = [{
+	$scope.expense = [{
 		"id": 1,
         "payer": "Isabel Saunders",
         "payee": "Caroline Adkins",
@@ -55,7 +55,7 @@ app.controller('ExpenseController',['$scope', function($scope){
         "notes": "Night Out",
         "type": "Expense"
 	}];
-	$scope.incomes = [{
+	$scope.income = [{
 		"id": 1,
         "payer": "Gretchen Hunter",
         "payee": "Isabel Saunders",
@@ -92,6 +92,14 @@ app.controller('ExpenseController',['$scope', function($scope){
         "notes": "Side Project Payment",
         "type": "Income"
 	}];
+    if(!window.localStorage.getItem('incomes')){
+        window.localStorage.setItem('incomes', JSON.stringify($scope.income));
+    }
+    if(!window.localStorage.getItem('expenses')){
+        window.localStorage.setItem('expenses', JSON.stringify($scope.expense));
+    }
+    $scope.incomes = JSON.parse(window.localStorage.getItem('incomes'));
+    $scope.expenses = JSON.parse(window.localStorage.getItem('expenses'));
 	$scope.showIncome = true;
 	$scope.showExpense = false;
     $scope.addIncome = false;
@@ -100,11 +108,13 @@ app.controller('ExpenseController',['$scope', function($scope){
     $scope.addIncomeRow = function(){
         $scope.addIncome = !$scope.addIncome;
         $scope.incomes.push($scope.rowObject);
+        window.localStorage.setItem('incomes', angular.toJson($scope.incomes));
         $scope.rowObject= {};
     };
     $scope.addExpenseRow = function(){
         $scope.addExpense = !$scope.addExpense;
         $scope.expenses.push($scope.rowObject);
+        window.localStorage.setItem('expenses', angular.toJson($scope.expenses));
         $scope.rowObject= {};
     };
 }]);
