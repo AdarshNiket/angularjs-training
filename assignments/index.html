@@ -2,7 +2,8 @@
 <html>
 <head>
 	<title>Angular Training</title>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<!--<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">-->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body ng-app="expenseManager">
 	<div ng-controller="ExpenseController" class="col-lg-12">
@@ -43,9 +44,17 @@
 					<td><input type="text" ng-model="rowObject.payee"></td>
 					<td><input type="text" ng-model="rowObject.amount"></td>
 					<td><input type="text" ng-model="rowObject.date"></td>
-					<td><input type="text" ng-model="rowObject.mode"></td>
+					<td>
+						<select>
+							<option ng-repeat="mode in modes" ng-model="rowObject.mode">{{mode}}</option>
+						</select>
+					</td>
 					<td><input type="text" ng-model="rowObject.notes"></td>
-					<td><input type="text" ng-model="rowObject.type"></td>
+					<td>
+						<select>
+							<option ng-repeat="type in types" ng-model="rowObject.type">{{type}}</option>
+						</select>
+					</td>
 					<td><button ng-click="addExpenseRow()">+</button></td>
 				</tr>
 			</tbody>
@@ -60,15 +69,23 @@
 					<td>{{income.notes}}</td>
 					<td>{{income.type}}</td>
 				</tr>
-				<tr ng-show="addIncome">
-					<td><input type="text" ng-model="rowObject.id"></td>
-					<td><input type="text" ng-model="rowObject.payer"></td>
-					<td><input type="text" ng-model="rowObject.payee"></td>
-					<td><input type="text" ng-model="rowObject.amount"></td>
-					<td><input type="text" ng-model="rowObject.date"></td>
-					<td><input type="text" ng-model="rowObject.mode"></td>
+				<tr ng-show="addIncome" novalidate name="incomeTable" ng-form>
+					<td><input type="text" ng-model="rowObject.id" required></td>
+					<td><input type="text" ng-model="rowObject.payer" required></td>
+					<td><input type="text" ng-model="rowObject.payee" required></td>
+					<td><input type="text" ng-model="rowObject.amount" required></td>
+					<td><input type="text" ng-model="rowObject.date" required></td>
+					<td>
+						<select>
+							<option ng-repeat="mode in modes" ng-model="rowObject.mode">{{mode}}</option>
+						</select>
+					</td>
 					<td><input type="text" ng-model="rowObject.notes"></td>
-					<td><input type="text" ng-model="rowObject.type"></td>
+					<td>
+						<select>
+							<option ng-repeat="type in types" ng-model="rowObject.type">{{type}}</option>
+						</select>
+					</td>
 					<td><button ng-click="addIncomeRow()">+</button></td>
 				</tr>
 			</tbody>

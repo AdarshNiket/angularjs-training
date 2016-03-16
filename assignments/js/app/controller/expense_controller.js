@@ -92,6 +92,8 @@ app.controller('ExpenseController',['$scope', function($scope){
         "notes": "Side Project Payment",
         "type": "Income"
 	}];
+    $scope.types = ["Expense","Income"];
+    $scope.modes = ["Cash","Electronic Transfer","Credit Card"];
     if(!window.localStorage.getItem('incomes')){
         window.localStorage.setItem('incomes', JSON.stringify($scope.income));
     }
